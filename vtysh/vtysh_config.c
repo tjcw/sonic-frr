@@ -497,7 +497,8 @@ int vtysh_read_config(const char *config_default_dir)
 	FILE *confp = NULL;
 	int ret;
 
-	confp = fopen(config_default_dir, "r");
+	if ( strcmp(config_default_dir,"-") == 0 ) confp = stdin ;
+	else confp = fopen(config_default_dir, "r");
 	if (confp == NULL) {
 		fprintf(stderr,
 			"%% Can't open configuration file %s due to '%s'.\n",
@@ -506,7 +507,7 @@ int vtysh_read_config(const char *config_default_dir)
 	}
 
 	ret = vtysh_read_file(confp);
-	fclose(confp);
+	if ( confp != stdin ) fclose(confp);
 
 	return (ret);
 }
