@@ -297,6 +297,7 @@ void suid_off(void)
 /* VTY shell main routine. */
 int main(int argc, char **argv, char **env)
 {
+#error Is this being built ?
 	char *p;
 	int opt;
 	int dryrun = 0;
